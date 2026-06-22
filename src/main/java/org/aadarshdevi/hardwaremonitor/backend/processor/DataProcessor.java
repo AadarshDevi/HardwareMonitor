@@ -2,6 +2,9 @@ package org.aadarshdevi.hardwaremonitor.backend.processor;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * gets data from SerialCommunicator. it then sorts it and stores it and will send it when the ui requests it
+ */
 public class DataProcessor implements Runnable {
 
     private static DataProcessor instance;
