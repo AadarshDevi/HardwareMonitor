@@ -23,8 +23,8 @@ public class ProjectProcessor {
 
     public void createProject() {
         // create hwproj.config // config stuff
-        // create hwproj.components // list of components
-        // create hwproj.setings // any settings
+        // create hwproj.component // list of components
+        // create hwproj.command // project specific settings
     }
 
     public void deleteProject() {
