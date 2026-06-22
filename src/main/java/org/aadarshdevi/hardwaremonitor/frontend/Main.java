@@ -1,27 +1,30 @@
 package org.aadarshdevi.hardwaremonitor.frontend;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import org.aadarshdevi.hardwaremonitor.frontend.controller.HomeController;
-
-import java.net.URL;
+import org.aadarshdevi.hardwaremonitor.backend.setup.ApplicationSetup;
 
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        URL resource = Main.class.getResource("/org/aadarshdevi/hardwaremonitor/frontend/controller/Home_v1.fxml");
-        System.out.println(resource);
-        FXMLLoader fxmlLoader = new FXMLLoader(resource);
-        BorderPane root = fxmlLoader.load();
-        HomeController controller = fxmlLoader.getController();
 
-        stage.setScene(new Scene(root));
-        stage.setTitle("Hardware Monitor 0.1.0");
-        stage.show();
+        ApplicationSetup as = ApplicationSetup.getInstance();
+        as.findOS();
+        as.findRoots();
+        as.findSettings();
+        as.findLog();
+        as.findComponents();
+
+
     }
 }
-// /src/main/java
+
+//        URL resource = Main.class.getResource("/org/aadarshdevi/hardwaremonitor/frontend/controller/Home_v1.fxml");
+//        System.out.println(resource);
+//        FXMLLoader fxmlLoader = new FXMLLoader(resource);
+//        BorderPane root = fxmlLoader.load();
+//        HomeController controller = fxmlLoader.getController();
 //
+//        stage.setScene(new Scene(root));
+//        stage.setTitle("Hardware Monitor 0.1.0");
+//        stage.show();
