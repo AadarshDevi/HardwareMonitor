@@ -28,6 +28,9 @@ public class ApplicationSettings {
     @Setter
     @Getter
     private Path componentsFolder;
+    @Setter
+    @Getter
+    private Path externalProjectsFile;
 
     public static ApplicationSettings getInstance() {
         if (instance == null) instance = new ApplicationSettings();
