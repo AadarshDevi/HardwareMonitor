@@ -1,5 +1,7 @@
 package org.aadarshdevi.hardwaremonitor.backend.setup;
 
+import org.aadarshdevi.hardwaremonitor.backend.data.Project;
+import org.aadarshdevi.hardwaremonitor.backend.file.ProjectProcessor;
 import org.aadarshdevi.hardwaremonitor.backend.setup.exception.OperatingSystemNotFoundException;
 
 import java.io.File;
@@ -8,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class ApplicationSetup {
     private static ApplicationSetup instance;
@@ -23,20 +26,20 @@ public class ApplicationSetup {
     }
 
     public void findRoots() throws IOException {
+
         Path appRoot = switch (settings.getOperatingSystem()) {
-            case WINDOWS ->
-                    Paths.get(System.getenv("APPDATA")).resolve("HardwareMonitor").resolve(settings.getVersion().toString());
+            case WINDOWS -> Paths.get(System.getenv("APPDATA"), "HardwareMonitor", settings.getVersion().toString());
             case MACOS ->
-                    Paths.get(System.getProperty("user.home")).resolve("Library").resolve("Application Support").resolve("HardwareMonitor").resolve(settings.getVersion().toString());
+                    Paths.get(System.getProperty("user.home"), "Library", "Application Support", "HardwareMonitor", settings.getVersion().toString());
             case LINUX ->
-                    Paths.get(System.getProperty("user.home")).resolve(".local").resolve("share").resolve("HardwareMonitor").resolve(settings.getVersion().toString());
+                    Paths.get(System.getProperty("user.home"), ".local", "share", "HardwareMonitor", settings.getVersion().toString());
         };
 
         createFolder(appRoot);
         settings.setAppRootFolder(appRoot);
         IO.println("App Root: " + settings.getAppRootFolder());
 
-        Path projectsRoot = appRoot.resolve("../").resolve("Projects");
+        Path projectsRoot = Paths.get(System.getProperty("user.home"), "Documents", "HardwareMonitor");
         createFolder(projectsRoot);
         settings.setProjectsRootFolder(projectsRoot);
         IO.println("Project Root: " + settings.getProjectsRootFolder());
@@ -51,7 +54,7 @@ public class ApplicationSetup {
         OperatingSystem.getInstance();
         OperatingSystem.OSType os = OperatingSystem.getOS();
         if (os == null) {
-            throw new OperatingSystemNotFoundException("Unable to find the Operating System of user " + System.getProperty("user.name"));
+            throw new OperatingSystemNotFoundException("Unable to find the Operating System of user: " + System.getProperty("user.name"));
         }
         settings.setOperatingSystem(os);
         IO.println("Operating System: " + os);
