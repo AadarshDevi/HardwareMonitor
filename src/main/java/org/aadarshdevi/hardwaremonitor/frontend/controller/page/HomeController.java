@@ -1,4 +1,4 @@
-package org.aadarshdevi.hardwaremonitor.frontend.controller;
+package org.aadarshdevi.hardwaremonitor.frontend.controller.page;
 
 import org.aadarshdevi.hardwaremonitor.backend.data.Project;
 
