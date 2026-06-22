@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Sends data to microcontroller. Receives data to microcontroller
+ * Sends data to microcontroller. Receives data to microcontroller. data received from microcontroller will be sent to DataProcessor
  */
 public class SerialCommunicator implements Runnable {
     private final SerialPort serialPort;
