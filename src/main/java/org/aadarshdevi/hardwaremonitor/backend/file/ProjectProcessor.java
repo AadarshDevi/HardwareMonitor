@@ -1,14 +1,8 @@
 package org.aadarshdevi.hardwaremonitor.backend.file;
 
 import org.aadarshdevi.hardwaremonitor.backend.data.Project;
-import org.aadarshdevi.hardwaremonitor.backend.setup.ApplicationSettings;
 
-import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Generates projects
@@ -21,33 +15,41 @@ public class ProjectProcessor {
         return instance;
     }
 
-    public void createProject() {
+    public Project createProject(Path projectPath) {
         // create hwproj.config // config stuff
         // create hwproj.component // list of components
         // create hwproj.command // project specific settings
+        return null; // fixme code
     }
 
-    public void deleteProject() {
+    public Project openProject(Path projectPath) {
+        // open a project
+        return null; // fixme code
+    }
+
+    public void deleteProject(Path projectPath) {
         // delete project folder and contents
     }
 
-    public void exportProject() {
+    public void exportProject(Path projectPath, Path exportPath) {
         // export project
     }
 
-    public void importProject() {
-        // import project
+    public Project importProject(Path projectPath, Path importPath) {
+        // import project aka read and put project in projects folder
+        return null; // fixme code
     }
 
-    public void renameProject() {
+    public void renameProject(Path projectPath, String newName) {
         // rename project
     }
 
-    public void readProject() {
+    public Project readProject(Path projectPath) {
         // read project
+        return null; // fixme code
     }
 
-    public List<Project> listProjects() {
+    public void listProjects() {
         // list projects
 //        File projectsFile = new File(ApplicationSettings.getInstance().getExternalProjectsFile().toString());
 //        List<Project> projects = new ArrayList<>();
