@@ -132,6 +132,7 @@ public class ApplicationSetup {
     }
 
     public List<Project> getProjects() {
-        return ProjectProcessor.getInstance().listProjects();
+//        return ProjectProcessor.getInstance().listProjects();
+        return null; // fixme (above)
     }
 }
