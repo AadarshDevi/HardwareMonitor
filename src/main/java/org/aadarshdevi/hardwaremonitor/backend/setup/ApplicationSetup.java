@@ -1,6 +1,7 @@
 package org.aadarshdevi.hardwaremonitor.backend.setup;
 
 import org.aadarshdevi.hardwaremonitor.backend.data.Project;
+import org.aadarshdevi.hardwaremonitor.backend.file.ProjectProcessor;
 import org.aadarshdevi.hardwaremonitor.backend.setup.exception.OperatingSystemNotFoundException;
 
 import java.io.File;
@@ -130,8 +131,8 @@ public class ApplicationSetup {
         settings.setLogFile(logFile);
     }
 
-    public List<Project> getProjects() {
-//        return ProjectProcessor.getInstance().listProjects();
-        return null; // fixme (above)
+    public List<Project> getProjects() throws FileNotFoundException {
+        return ProjectProcessor.getInstance().listProjects();
+//        return null; // fixme (above)
     }
 }
