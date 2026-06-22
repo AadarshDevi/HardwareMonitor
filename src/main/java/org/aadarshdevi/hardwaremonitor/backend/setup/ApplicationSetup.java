@@ -40,6 +40,11 @@ public class ApplicationSetup {
         createFolder(projectsRoot);
         settings.setProjectsRootFolder(projectsRoot);
         IO.println("Project Root: " + settings.getProjectsRootFolder());
+
+        Path externalProjectsFile = settings.getAppRootFolder().resolve("hardwaremonitor.projects");
+        createFile(externalProjectsFile);
+        settings.setExternalProjectsFile(externalProjectsFile);
+        IO.println("External Projects File: " + externalProjectsFile);
     }
 
     public void findOS() {
