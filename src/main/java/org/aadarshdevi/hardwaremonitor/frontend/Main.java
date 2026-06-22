@@ -2,7 +2,10 @@ package org.aadarshdevi.hardwaremonitor.frontend;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import org.aadarshdevi.hardwaremonitor.backend.data.Project;
 import org.aadarshdevi.hardwaremonitor.backend.setup.ApplicationSetup;
+
+import java.util.List;
 
 public class Main extends Application {
     @Override
@@ -14,8 +17,7 @@ public class Main extends Application {
         as.findSettings();
         as.findLog();
         as.findComponents();
-
-
+        List<Project> projects = as.getProjects();
     }
 }
 
