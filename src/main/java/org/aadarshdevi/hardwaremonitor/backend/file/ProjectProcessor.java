@@ -1,18 +1,33 @@
 package org.aadarshdevi.hardwaremonitor.backend.file;
 
 import org.aadarshdevi.hardwaremonitor.backend.data.Project;
+import org.aadarshdevi.hardwaremonitor.backend.setup.ApplicationSettings;
 
+import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Generates projects
  */
 public class ProjectProcessor {
     private static ProjectProcessor instance;
+    private final ApplicationSettings as;
+
+    private ProjectProcessor() {
+        as = ApplicationSettings.getInstance();
+    }
 
     public static ProjectProcessor getInstance() {
         if (instance == null) instance = new ProjectProcessor();
         return instance;
+    }
+
+    public boolean findProject(Path projectPath) {
+        // todo code
+        return false;
     }
 
     public Project createProject(Path projectPath) {
@@ -49,27 +64,45 @@ public class ProjectProcessor {
         return null; // fixme code
     }
 
-    public void listProjects() {
-        // list projects
-//        File projectsFile = new File(ApplicationSettings.getInstance().getExternalProjectsFile().toString());
-//        List<Project> projects = new ArrayList<>();
-//        try (BufferedReader reader = new BufferedReader(new FileReader(projectsFile))) {
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                // todo code
-//                Path path = Paths.get(line.split("##")[1].trim());
-//                if (!path.toFile().exists() || !path.toFile().isDirectory()) {
-//                    Files.createDirectories(path);
-//                    continue;
-//                }
-//                System.out.println(path);
-//                projects.add(new Project()); // fixme create a real project based on data
-//            }
-//        } catch (FileNotFoundException e) {
-//            throw new RuntimeException(e);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return projects; // todo
+    public List<Project> listProjects() throws FileNotFoundException {
+        List<Project> allProjects = new ArrayList<>();
+
+        // files in /Documents
+        File[] projects = new File(as.getProjectsRootFolder().toString()).listFiles();
+        if (projects == null) {
+            throw new FileNotFoundException("Unable to find Documents/HardwareMonitor folder");
+        }
+        for (File file : projects) {
+            if (file.isFile()) {
+                continue;
+            }
+            Project project = new Project();
+            project.setName(file.getName());
+            project.setPath(Path.of(file.getAbsolutePath()));
+            allProjects.add(project);
+        }
+
+        // files in hardwaremonitor.projects
+        try (BufferedReader reader = new BufferedReader(new FileReader(as.getExternalProjectsFile().toFile()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                Project project = new Project();
+                String[] values = line.split(" ## ");
+
+                if (!Files.exists(Path.of(values[1]))) {
+                    continue;
+                }
+
+                project.setName(values[0].trim());
+                project.setPath(Path.of(values[1].trim()));
+                allProjects.add(project);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return allProjects;
     }
 }
