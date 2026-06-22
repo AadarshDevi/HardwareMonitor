@@ -127,4 +127,8 @@ public class ApplicationSetup {
         }
         settings.setLogFile(logFile);
     }
+
+    public List<Project> getProjects() {
+        return ProjectProcessor.getInstance().listProjects();
+    }
 }
