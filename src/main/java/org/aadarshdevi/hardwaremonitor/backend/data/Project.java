@@ -1,5 +1,6 @@
 package org.aadarshdevi.hardwaremonitor.backend.data;
 
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class Project {
     String name;
     List<Component> components;
     List<String> commands;
+    Path path;
 
     public Project() {
         /*
