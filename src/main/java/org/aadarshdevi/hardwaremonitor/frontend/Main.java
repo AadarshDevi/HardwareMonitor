@@ -18,6 +18,8 @@ public class Main extends Application {
         as.findLog();
         as.findComponents();
         List<Project> projects = as.getProjects();
+
+        // add projects to ui
     }
 }
 
