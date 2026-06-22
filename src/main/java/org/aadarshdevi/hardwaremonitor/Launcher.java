@@ -5,6 +5,10 @@ import org.aadarshdevi.hardwaremonitor.frontend.Main;
 
 public class Launcher {
     static void main(String[] args) {
+        Application.launch(Main.class, args);
+    }
+}
+
 //        SerialPort[] serialPorts = SerialPort.getCommPorts();
 //        for (SerialPort serialPort : serialPorts) {
 //            System.out.println(serialPort.getSystemPortName() + " :: " + serialPort);
@@ -13,6 +17,3 @@ public class Launcher {
 //        SerialCommunicator serialCommunicator = new SerialCommunicator(SerialPort.getCommPort(serialPort));
 //        Thread serialCommThread = new Thread(serialCommunicator);
 //        serialCommThread.start();
-        Application.launch(Main.class, args);
-    }
-}
