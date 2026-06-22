@@ -1,7 +1,6 @@
 package org.aadarshdevi.hardwaremonitor.backend.setup;
 
 import org.aadarshdevi.hardwaremonitor.backend.data.Project;
-import org.aadarshdevi.hardwaremonitor.backend.file.ProjectProcessor;
 import org.aadarshdevi.hardwaremonitor.backend.setup.exception.OperatingSystemNotFoundException;
 
 import java.io.File;
